@@ -126,7 +126,7 @@ main {
     color: var(--primary-color);
 }
 
-/* 컨트롤 버튼 스타일 */
+/* Control button styles */
 .control-btns {
     margin-top: 30px;
     display: flex;
@@ -173,7 +173,7 @@ main {
     color: #666;
 }
 
-/* 단어장 개요 스타일 */
+/* Word list overview styles */
 .word-table {
     width: 100%;
     border-collapse: collapse;
@@ -241,7 +241,7 @@ main {
     margin-bottom: 10px;
 }
 
-/* 학습 모드 스타일 */
+/* Learn mode styles */
 .quiz-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -342,7 +342,7 @@ main {
 
 .hit-correct {
     filter: hue-rotate(90deg) brightness(2) drop-shadow(0 0 20px #2ecc71) !important;
-    background: none !important; /* 이미지 유지 위해 배경색 제거 */
+    background: none !important; /* Remove background color to maintain image */
     transform: scale(1.8) !important;
     opacity: 0;
 }
@@ -354,7 +354,7 @@ main {
     opacity: 0;
 }
 
-/* 화면 흔들기 효과 */
+/* Screen shake effect */
 .shake {
     animation: shakeAnim 0.5s;
 }
@@ -375,7 +375,7 @@ main {
     margin: 10px;
 }
 
-/* 틀린 단어 리스트 스타일 */
+/* Incorrect word list style */
 .struggle-container {
     margin: 25px 0;
     padding: 20px;
@@ -404,7 +404,7 @@ main {
     border: 1px solid #fecaca;
 }
 
-/* Marketplace 전용 스타일 */
+/* Marketplace specific styles */
 .market-card {
     background: white;
     padding: 20px;
