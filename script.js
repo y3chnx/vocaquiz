@@ -74,13 +74,13 @@ const app = {
                 }
             }
 
-            // 2. 구글 드라이브가 경고 페이지(HTML)를 반환했는지 확인
+            // 2. Check if Google Drive returned a warning page (HTML)
             if (contents.trim().startsWith('<')) {
-                throw new Error("JSON 대신 HTML 응답을 받았습니다. 파일이 너무 크거나 공유 설정이 '공개'인지 확인하세요.");
+                throw new Error("Received HTML response instead of JSON. Check if file is too large or sharing is set to 'Public'.");
             }
 
             const parsedData = JSON.parse(contents);
-            if (!Array.isArray(parsedData)) throw new Error("JSON 형식이 배열([])이 아닙니다.");
+            if (!Array.isArray(parsedData)) throw new Error("JSON format is not an array ([]).");
 
             this.words = parsedData;
             
@@ -89,8 +89,8 @@ const app = {
             this.switchMode('overview');
         } catch (err) {
             console.error(err);
-            container.innerHTML = originalContent; // 에러 시 원래 화면으로 복구
-            alert("에러 발생: " + err.message);
+            container.innerHTML = originalContent; // Restore original content on error
+            alert("Error occurred: " + err.message);
         }
     },
 
@@ -98,7 +98,7 @@ const app = {
         this.currentMode = mode;
         this.currentIndex = 0;
         if (mode === 'flashcards' || mode === 'learn') {
-            this.activeWords = [...this.words]; // 모드 전환 시 학습 목록 초기화
+            this.activeWords = [...this.words]; // Reset study list on mode switch
         }
         this.render();
     },
@@ -211,15 +211,15 @@ const app = {
 
             container.innerHTML = `
                 <div class="fade-in">
-                    <h2>🚀 미션 완료!</h2>
-                    <h1 style="font-size: 3rem; color: #f1c40f;">정답률: ${accuracy}%</h1>
-                    <p style="margin-bottom: 20px;">최종 점수: ${this.gameScore}</p>
+                    <h2>🚀 Mission Accomplished!</h2>
+                    <h1 style="font-size: 3rem; color: #f1c40f;">Accuracy: ${accuracy}%</h1>
+                    <p style="margin-bottom: 20px;">Final Score: ${this.gameScore}</p>
                     
                     <div class="test-results" style="margin-top: 30px; text-align: left;">
-                        <h3>상세 결과 리포트</h3>
+                        <h3>Detailed Results Report</h3>
                         <table class="word-table">
                             <thead>
-                                <tr><th>단어</th><th>내가 고른 뜻</th><th>실제 정답</th><th>결과</th></tr>
+                                <tr><th>Word</th><th>My Choice</th><th>Correct Answer</th><th>Result</th></tr>
                             </thead>
                             <tbody>
                                 ${resultsHtml}
@@ -227,15 +227,15 @@ const app = {
                         </table>
                     </div>
 
-                    <button class="main-btn" onclick="app.startSpaceGame()">다시 하기</button>
-                    <button class="main-btn" style="background-color: #95a5a6;" onclick="app.switchMode('overview')">단어장으로 돌아가기</button>
+                    <button class="main-btn" onclick="app.startSpaceGame()">Play Again</button>
+                    <button class="main-btn" style="background-color: #95a5a6;" onclick="app.switchMode('overview')">Back to Word Set</button>
                 </div>`;
             return;
         }
 
         const currentWord = this.activeWords[this.currentIndex];
         
-        // 오답 4개 추출
+        // Extract 4 distractors
         let distractors = this.words
             .filter(w => w.vocab !== currentWord.vocab)
             .sort(() => 0.5 - Math.random())
@@ -244,9 +244,9 @@ const app = {
         const allChoices = [...distractors, currentWord].sort(() => 0.5 - Math.random());
         const choices = [];
         
-        // 겹침 방지를 위한 슬롯 시스템 (0~100%를 5구간으로 나눔)
+        // Slot system for overlapping prevention (divide 0~100% into 5 sections)
         const slots = [5, 23, 41, 59, 77];
-        // 슬롯을 무작위로 섞음
+        // Shuffle slots
         slots.sort(() => Math.random() - 0.5);
 
         allChoices.forEach((choice, index) => {
@@ -255,7 +255,7 @@ const app = {
                 isCorrect: choice.vocab === currentWord.vocab,
                 vocab: choice.vocab,
                 id: index,
-                left: slots[index] + (Math.random() * 5) // 각 슬롯 내에서 약간의 랜덤성 부여
+                left: slots[index] + (Math.random() * 5) // Slight randomness within slot
             });
         });
 
@@ -263,7 +263,7 @@ const app = {
             <div class="game-area">
                 <div class="game-header">
                     <div class="game-score">Score: ${this.gameScore}</div>
-                    <div class="game-target">목표 단어: <span>${currentWord.vocab}</span></div>
+                    <div class="game-target">Target Word: <span>${currentWord.vocab}</span></div>
                     <div class="game-progress">${this.currentIndex + 1} / ${this.activeWords.length}</div>
                 </div>
                 
