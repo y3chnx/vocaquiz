@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocaQuiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">VocaQuiz</div>
+            <a href="https://github.com/y3chnx/vocaquiz/tree/main" target="_blank" class="github-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg" alt="GitHub Logo">
+            </a>
+        </nav>
+    </header>
+
+    <main id="app-container">
+        <!-- Dynamic content is loaded here -->
+        <section id="welcome-screen">
+            <h1>Welcome to VocaQuiz</h1>
+            <p>To get started, select a JSON vocabulary file.</p>
+            
+            <div class="upload-section">
+                <input type="file" id="file-input" accept=".json" style="display: none;">
+                <button class="main-btn" onclick="document.getElementById('file-input').click()">Upload File (.json)</button>
+                
+                <p style="margin-top: 20px;">Or enter Google Drive link:</p>
+                <input type="text" id="link-input" class="test-input" placeholder="https://drive.google.com/file/d/..." style="margin-top: 10px;">
+                <button class="main-btn" style="background-color: #27ae60;" onclick="app.loadFromUrl()">Load from Link</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
